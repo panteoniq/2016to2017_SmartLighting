@@ -1,0 +1,21 @@
+CREATE TABLE `devices` (
+  `ip` varchar(15) NOT NULL,
+  `mac` varchar(17) NOT NULL,
+  `type` int(1) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  PRIMARY KEY (`ip`,`mac`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `light` (
+  `device_ip` varchar(15) NOT NULL,
+  `device_mac` varchar(17) NOT NULL,
+  `type` int(2) NOT NULL,
+  `room_id` int(2) NOT NULL,
+  `room_light_num` int(2) NOT NULL,
+  `red` int(3) NOT NULL,
+  `green` int(3) NOT NULL,
+  `blue` int(3) NOT NULL,
+  PRIMARY KEY (`device_ip`,`device_mac`),
+  CONSTRAINT `device_forgien` FOREIGN KEY (`device_ip`, `device_mac`) REFERENCES `devices` (`ip`, `mac`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
